@@ -389,7 +389,6 @@ static void vmpressure_global(gfp_t gfp, unsigned long scanned,
 		return;
 
 	spin_lock(&vmpr->sr_lock);
-
 	if (!vmpr->scanned)
 		calculate_vmpressure_win();
 
