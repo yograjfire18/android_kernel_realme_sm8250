@@ -471,10 +471,6 @@ CFLAGS_KERNEL +=   -DOPLUS_FEATURE_POWER_EFFICIENCY
 CFLAGS_MODULE +=   -DOPLUS_FEATURE_POWER_EFFICIENCY
 # endif
 
-#ifdef COLOROS_EDIT
--include OplusKernelEnvConfig.mk
-#endif // COLOROS_EDIT
-
 #ifdef VENDOR_EDIT
 ifneq (,$(findstring Aging,$(SPECIAL_VERSION)))
 OPPO_F2FS_DEBUG := true
