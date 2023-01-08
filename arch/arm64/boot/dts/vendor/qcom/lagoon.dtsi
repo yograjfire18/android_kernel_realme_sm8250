@@ -43,6 +43,9 @@
 		swr0 = &swr0;
 		swr1 = &swr1;
 		swr2 = &swr2;
+		//#ifdef OPLUS_ARCH_EXTENDS
+		i2c2 = &qupv3_se10_i2c;
+		//#endif /* OPLUS_ARCH_EXTENDS */
 	};
 
 	cpus {
@@ -3805,7 +3808,7 @@
 	vdd_l1_l2-supply = <&S8E>;
 	vdd_l3_l4-supply = <&BOB>;
 	vdd_l5-supply = <&BOB>;
-	vdd_l6-supply = <&S2A>;
+//	vdd_l6-supply = <&S2A>;
 	vdd_l7-supply = <&BOB>;
 };
 
