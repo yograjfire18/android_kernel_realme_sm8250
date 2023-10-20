@@ -3686,6 +3686,7 @@ static struct attribute *oplus_display_attrs[] = {
 /*#ifdef OPLUS_BUG_STABILITY*/
 	&dev_attr_dsi_cmd_log_switch.attr,
 /*#endif*/
+	/* fp type config */
 	&dev_attr_fp_state.attr,
 	NULL,	/* need to NULL terminate the list of attributes */
 };
