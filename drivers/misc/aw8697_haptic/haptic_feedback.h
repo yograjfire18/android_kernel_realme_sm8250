@@ -18,7 +18,7 @@
 #define MAX_DEV_EVENT_QUEUE_LEN              (10)
 #define MAX_MEM_ALLOC_EVENT_QUEUE_LEN        (5)
 
-#define OPLUS_HSPTIC_TRIGGER_MSG_LEN         (2048)
+#define OPLUS_HAPTIC_TRIGGER_MSG_LEN         (2048)
 
 #define HAPTIC_TRACK_EVENT_DEVICE_ERR          "haptic_device_err"
 #define HAPTIC_TRACK_EVENT_FRE_CALI_ERR        "haptic_fre_cli_err"
