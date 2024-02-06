@@ -1551,7 +1551,6 @@ struct task_struct {
 	/* Used by LSM modules for access restriction: */
 	void				*security;
 #endif
-
 #ifdef OPLUS_FEATURE_SCHED_ASSIST
 	int ux_state;
 	atomic64_t inherit_ux;
@@ -1604,6 +1603,9 @@ struct task_struct {
 	/* task is frozen/stopped (used by the cgroup freezer) */
 
 	ANDROID_KABI_USE(1, unsigned frozen:1);
+#ifdef CONFIG_ANDROID_SIMPLE_LMK
+	struct task_struct		*simple_lmk_next;
+#endif
 
 	/* 095444fad7e3 ("futex: Replace PF_EXITPIDONE with a state") */
 	ANDROID_KABI_USE(2, unsigned int futex_state);
@@ -1630,10 +1632,6 @@ struct task_struct {
 	ANDROID_KABI_RESERVE(7);
 #endif
 	ANDROID_KABI_RESERVE(8);
-
-#ifdef CONFIG_ANDROID_SIMPLE_LMK
-	struct task_struct		*simple_lmk_next;
-#endif
 
 	/*
 	 * New fields for task_struct should be added above here, so that

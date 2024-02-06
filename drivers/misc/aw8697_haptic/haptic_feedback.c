@@ -110,7 +110,7 @@ static int oplus_haptic_event_payload_pack(struct haptic_fb_detail *fb_info)
 		return TRACK_CMD_ERROR_DATA_INVALID;
 	}
 
-	memset(chip->dcs_info, 0x0, OPLUS_HSPTIC_TRIGGER_MSG_LEN);
+	memset(chip->dcs_info, 0x0, OPLUS_HAPTIC_TRIGGER_MSG_LEN);
 	snprintf(chip->dcs_info->payload, MAX_PAYLOAD_LEN,
 		 "NULL$$EventField@@%s$$FieldData@@%s$$detailData@@%s",
 		 fb_event_field,
@@ -567,7 +567,7 @@ static int oplus_haptic_feedback_probe(struct platform_device *pdev)
 	}
 
 	hapric_track->dcs_info = (struct kernel_packet_info *)devm_kzalloc(&pdev->dev,
-		sizeof(char) * OPLUS_HSPTIC_TRIGGER_MSG_LEN, GFP_KERNEL);
+		sizeof(char) * OPLUS_HAPTIC_TRIGGER_MSG_LEN, GFP_KERNEL);
 	if (!hapric_track->dcs_info) {
 		ret = -ENOMEM;
 		goto dcs_info_kmalloc_fail;
