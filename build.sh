@@ -1,0 +1,24 @@
+#!/bin/bash
+rm -rf ${KERNEL_OUT}
+config=kona-perf_defconfig
+
+MAKE_PATH=$(pwd)/tc/build-tools/bin/
+CROSS_COMPILE=$(pwd)/tc/aarch64-linux-android-4.9/bin/aarch64-linux-android-
+KERNEL_ARCH=arm64
+KERNEL_OUT=$(pwd)/out
+export KERNEL_SRC=${KERNEL_OUT}
+export CLANG_TRIPLE=aarch64-linux-gnu-
+OUT_DIR=${KERNEL_OUT}
+ARCH=${KERNEL_ARCH}
+TARGET_INCLUDES=${TARGET_KERNEL_MAKE_CFLAGS}
+TARGET_LINCLUDES=${TARGET_KERNEL_MAKE_LDFLAGS}
+
+TARGET_KERNEL_MAKE_ENV+="CC=$(pwd)/tc/clang-17/bin/clang"
+
+${MAKE_PATH}make O=${OUT_DIR} ${TARGET_KERNEL_MAKE_ENV} LLVM_IAS=1 HOSTLDFLAGS="${TARGET_LINCLUDES}" ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip -j10 LLVM_IAS=1 vendor/$config
+
+# cd ${KERNEL_DIR} && \
+# ${MAKE_PATH}make O=${OUT_DIR} ${TARGET_KERNEL_MAKE_ENV} HOSTLDFLAGS="${TARGET_LINCLUDES}" ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} menuconfig
+
+cd ${OUT_DIR} && \
+${MAKE_PATH}make ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} LLVM_IAS=1 HOSTCFLAGS="${TARGET_INCLUDES}" HOSTLDFLAGS="${TARGET_LINCLUDES}" O=${OUT_DIR} ${TARGET_KERNEL_MAKE_ENV} NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip LLVM_IAS=1 -j10 | tee build.log
